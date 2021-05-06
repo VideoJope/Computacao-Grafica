@@ -41,7 +41,7 @@ class Quaternion:
         return np.mat([[1 - 2*a3**2 - 2*a4**2,     2*a2*a3 - 2*a4*a1,     2*a2*a4 + 2*a3*a1, 0], 
                        [    2*a2*a3 + 2*a4*a1, 1 - 2*a2**2 - 2*a4**2,     2*a3*a4 - 2*a2*a1, 0],
                        [    2*a2*a4 - 2*a3*a1,     2*a3*a4 + 2*a2*a1, 1 - 2*a2**2 - 2*a3**2, 0],
-                       [                    0,                     0,                     0, 1]])
+                       [                    0,                     0,                     0, 1]]).round(2)
 
     def __repr__(self):
         return "({},{},{},{})".format(self.w, self.x, self.y, self.z)
