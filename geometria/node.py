@@ -1,5 +1,5 @@
-from transformations import scale, translation, rotation
-import numpy as numpy
+from geometria.transformations import scale, translation, rotation
+import numpy as np
 
 class Node:
     
@@ -10,10 +10,10 @@ class Node:
         self.rotation = (0,0,0)
 
     def get_model_matrix(self):
-        #if self.parent != None:
-        #    parent_model = self.parent.get_model_matrix()
-        #else:
-        #    parent_model = np.identity(4)
+        if self.parent != None:
+            parent_model = self.parent.get_model_matrix()
+        else:
+            parent_model = np.identity(4)
 
         s_x, s_y, s_z = self.scale
         t_x, t_y, t_z = self.position
@@ -26,5 +26,4 @@ class Node:
         model = np.matmul(r, s)                 # R * S
         model = np.matmul(t, model).round(3)    # T * R * S
 
-        #return np.matmul(model, parent_model)
-        return model
+        return np.matmul(model, parent_model)

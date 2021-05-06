@@ -1,6 +1,6 @@
 from geometria.node import Node
 from geometria.camera import Camera
-from geometria.quaternion import Quaternion
+import numpy as np
 
 # ---------------------------
 # Teste de Camera
@@ -34,12 +34,3 @@ point = np.transpose(np.mat([0.5, 0.5, 0.5, 0]))
 # 5. Calcula as coordenadas de Tela
 point_clip = np.matmul(projection, np.matmul(view, np.matmul(model, point)))
 print(point_clip)
-
-# ---------------------------
-# Teste de Quaternion
-# ---------------------------
-
-q1 = Quaternion.from_angle(120, [1, 1, 1])
-q2 = Quaternion.from_angle(-30, [1, 0, 0])
-q3 = q1.multiply(q2)
-q3.to_rotation_matrix()

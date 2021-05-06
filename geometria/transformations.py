@@ -1,4 +1,5 @@
 from math import cos, sin, pi
+import numpy as np
 
 def scale(x,y,z):
     scale = [[x,0,0,0],
