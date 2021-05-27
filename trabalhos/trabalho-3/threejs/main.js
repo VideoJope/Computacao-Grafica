@@ -108,7 +108,7 @@ function onDocumentKeyDown(event) {
     };
 
     // Run selected animation
-    animation = new animations[1]();
+    animation = new animations[key]();
     animation.run()
 }
 
