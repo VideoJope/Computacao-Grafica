@@ -6,16 +6,13 @@ Object.assign( WaveAnimation.prototype, {
         let upperArmTween = new TWEEN.Tween( {theta:0} )
             .to( {theta:Math.PI }, 500)
             .onUpdate(function(){
-                // This is an example of rotation of the right_upper_arm 
-                // Notice that the transform is M = T * R 
                 let right_upper_arm =  robot.getObjectByName("right_upper_arm");
-                right_upper_arm.matrix.makeRotationZ(this._object.theta).premultiply( new THREE.Matrix4().makeTranslation(2.6, 0, 0 ) );
-
-
-
-                // Updating final world matrix (with parent transforms) - mandatory
+                right_upper_arm.matrix
+                    .premultiply( new THREE.Matrix4().makeTranslation(0, 0, 0 ) )
+                    .makeRotationZ(this._object.theta)
+                    .premultiply( new THREE.Matrix4().makeTranslation(2.6, 0, 0 ) );
                 right_upper_arm.updateMatrixWorld(true);
-                // Updating screen
+
                 stats.update();
                 renderer.render(scene, camera);    
             })
