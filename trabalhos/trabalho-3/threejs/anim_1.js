@@ -3,6 +3,7 @@ function WaveAnimation() {}
 Object.assign( WaveAnimation.prototype, {
 
     init: function() {
+        //Animações de membros isolados
         var right_upper_arm_tween = this.create_rotation_tween(object_name="right_upper_arm", 
             startAngle=0, endAngle=Math.PI/2, 
             duration=500, pivot=[0,2,0]);
@@ -22,8 +23,9 @@ Object.assign( WaveAnimation.prototype, {
             startAngle=0, endAngle=-Math.PI/12, 
             duration=500, pivot=[0,0.5,0]);
 
+        // Estrutura da Animação
         right_upper_arm_tween.start();
-        right_lower_arm_tween.start();   
+        right_lower_arm_tween.repeat(2).yoyo(true).start();   
         right_hand_tween.start();
         head_tween.start();
         left_lower_arm_tween.start();
@@ -47,11 +49,11 @@ Object.assign( WaveAnimation.prototype, {
                     var y = animated_object.position.y;
                     var z = animated_object.position.z;
                     
-                    animated_object.matrix.makeTranslation(0,0,0)
-                        .premultiply( new THREE.Matrix4().makeTranslation(-pivot[0], -pivot[1], -pivot[2]) )
-                        .premultiply( new THREE.Matrix4().makeRotationZ(this._object.theta) )
-                        .premultiply( new THREE.Matrix4().makeTranslation(pivot[0], pivot[1], pivot[2]) )
-                        .premultiply( new THREE.Matrix4().makeTranslation(x, y, z) );
+                    animated_object.matrix.makeTranslation(0, 0, 0)                                             //1. Vira uma matriz identidade. Objeto na origem.
+                        .premultiply( new THREE.Matrix4().makeTranslation(-pivot[0], -pivot[1], -pivot[2]) )    //5. Retorna para a posição
+                        .premultiply( new THREE.Matrix4().makeRotationZ(this._object.theta) )                   //4. Rotaciona o objeto
+                        .premultiply( new THREE.Matrix4().makeTranslation(pivot[0], pivot[1], pivot[2]) )       //3. Translada mais um pouco até o ponto de pivot
+                        .premultiply( new THREE.Matrix4().makeTranslation(x, y, z) );                           //2. Translada até a posição
 
                     animated_object.updateMatrixWorld(true);
                     stats.update();

@@ -103,8 +103,8 @@ function onDocumentKeyDown(event) {
 
     animations = {
         1 : WaveAnimation,
-        2 : false,
-        3 : false,
+        2 : Animation2,
+        3 : Animation3,
     };
 
     // Run selected animation
