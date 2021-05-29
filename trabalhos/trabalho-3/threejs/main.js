@@ -107,9 +107,25 @@ function onDocumentKeyDown(event) {
         3 : Animation3,
     };
 
+    // Reset Robot in Scene
+    resetRobot();
+
     // Run selected animation
     animation = new animations[key]();
-    animation.run()
+    animation.run();
+}
+
+function resetRobot() {
+    scene.remove(robot);
+    robot = gen_robot();
+    scene.add(robot);
+    // Removing autoupdate (necessary for applying affine xforms with matrices)
+    scene.traverse( function( node ) {
+        if ( node instanceof THREE.Object3D ) {
+            node.updateMatrixWorld();
+            node.matrixAutoUpdate = false;
+        }
+    });
 }
 
 init();
